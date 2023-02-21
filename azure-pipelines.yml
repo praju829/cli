@@ -13,14 +13,8 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
   
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: 'package-lock.json'
-
-
-- task: SnykSecurityScan@1
-  inputs:
+-  task: SnykSecurityScan@1
+   inputs:
     serviceConnectionEndpoint: 'snyk'
     testType: 'app'
     monitorWhen: 'always'
