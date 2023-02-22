@@ -19,6 +19,7 @@ steps:
     testType: 'app'
     monitorWhen: 'always'
     failOnIssues: true
+- task: SonarQubeAnalyze@5
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
