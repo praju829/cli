@@ -16,7 +16,16 @@ steps:
   inputs:
     SonarCloud: 'azuredevops-sonarcloud-conn'
     organization: 'prajktamhapsekar829'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'mysnykproject'
+    cliProjectName: 'mysnykproject'
+    cliSources: '.'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.java.binaries.
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
