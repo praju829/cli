@@ -11,25 +11,32 @@ pool:
 
 steps:
 - script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  displayName: 'Run a one-line script' 
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'snyk'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: false
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'azuredevops-sonarcloud-conn'
     organization: 'prajktamhapsekar829'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: 'mysnykproject'
-    cliProjectName: 'mysnykproject'
+    cliProjectKey: 'prajktamhapsekar829'
+    cliProjectName: 'cli'
     cliSources: '.'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.java.binaries.
+- task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '300'
-- task: SonarCloudAnalyze@1
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
